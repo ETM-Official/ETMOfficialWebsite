@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETM Official</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #0b0b0b;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      height: 100vh;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
+        url('background.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(2px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 20px;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .logo {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #d4a65a;
+      box-shadow: 0 0 40px rgba(212,166,90,0.4);
+      margin-bottom: 25px;
+      background: #111;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 6rem;
+      color: #f1c27d;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(0,0,0,0.7);
+    }
+
+    .tagline {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      color: #ddd;
+      line-height: 1.8;
+    }
+
+    .buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 34px;
+      background: transparent;
+      border: 2px solid #d4a65a;
+      color: #f1c27d;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 60px;
+      transition: 0.4s;
+      letter-spacing: 1px;
+    }
+
+    .btn:hover {
+      background: #d4a65a;
+      color: #111;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(212,166,90,0.3);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      padding: 20px;
+      z-index: 999;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav a {
+      color: #eee;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: #d4a65a;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      padding: 110px 10%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      font-family: 'Cinzel', serif;
+      color: #f1c27d;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 850px;
+      margin: auto;
+      color: #bbb;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .card {
+      background: #151515;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 35px;
+      transition: 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: #d4a65a;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      color: #f1c27d;
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      color: #ccc;
+      line-height: 1.7;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 60px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 22px;
+      transition: 0.4s;
+      border: 2px solid transparent;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      border-color: #d4a65a;
+    }
+
+    .join-box {
+      margin-top: 60px;
+      background: linear-gradient(145deg, #151515, #0e0e0e);
+      padding: 60px;
+      border-radius: 30px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .join-box h3 {
+      font-size: 2rem;
+      color: #f1c27d;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      padding: 40px 20px;
+      text-align: center;
+      background: #080808;
+      color: #777;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+      }
+
+      nav {
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .section-title {
+        font-size: 2.4rem;
+      }
+
+      .join-box {
+        padding: 35px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <img src="logo.png" alt="ETM Official Logo" class="logo">
+
+      <h1>ETM Official</h1>
+
+      <p class="tagline">
+        Western power. Modern domination. Built for elite players and loyal members.
+      </p>
+
+      <div class="buttons">
+        <a href="#about" class="btn">Explore</a>
+        <a href="#join" class="btn">Join Clan</a>
+      </div>
+    </div>
+  </section>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#join">Join</a>
+  </nav>
+
+  <section id="about">
+    <h2 class="section-title">The Frontier</h2>
+
+    <p class="section-subtitle">
+      ETM Official is more than a clan. It is a western-inspired empire built on loyalty,
+      skill, and reputation. Ride with legends and dominate every battlefield.
+    </p>
+  </section>
+
+  <section id="features">
+    <h2 class="section-title">Why ETM?</h2>
+
+    <div class="grid">
+      <div class="card">
+        <h3>⚔ Elite Squad</h3>
+        <p>
+          Competitive members with powerful teamwork and strong communication.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🔥 Western Identity</h3>
+        <p>
+          Unique branding inspired by cowboys, outlaws, gold, and dark desert aesthetics.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🎯 Community</h3>
+        <p>
+          A place for loyal members, events, clips, tournaments, and nonstop grinding.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2 class="section-title">Clan Gallery</h2>
+
+    <div class="gallery">
+      <img src="gallery1.jpg" alt="Gallery Image 1">
+      <img src="gallery2.jpg" alt="Gallery Image 2">
+      <img src="gallery3.jpg" alt="Gallery Image 3">
+    </div>
+  </section>
+
+  <section id="join">
+    <h2 class="section-title">Join ETM Official</h2>
+
+    <div class="join-box">
+      <h3>Become A Legend</h3>
+
+      <p style="color:#bbb; line-height:1.8; max-width:700px; margin:auto;">
+        Add your Discord server, TikTok, YouTube, or Instagram links here.
+        Recruit new members and build your western empire.
+      </p>
+
+      <div class="buttons" style="margin-top:35px;">
+        <a href="#" class="btn">Discord</a>
+        <a href="#" class="btn">TikTok</a>
+        <a href="#" class="btn">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 ETM Official • All Rights Reserved
+  </footer>
+
+</body>
+</html>
